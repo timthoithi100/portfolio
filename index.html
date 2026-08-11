@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tim Thoithi — Full-Stack &amp; Platform Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1420;
+    --bg-alt:#0d1928;
+    --panel:#101f33;
+    --panel-line:#1c3350;
+    --grid-line:#132338;
+    --text:#dbe6f0;
+    --muted:#6f8aa6;
+    --muted-dim:#4c6280;
+    --teal:#48d8c6;
+    --teal-dim:#1f5a55;
+    --spray:#ff7a45;
+    --spray-dim:#7a3d24;
+    --amber:#f0b429;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:36px 36px;
+    background-position:-1px -1px;
+  }
+  ::selection{background:var(--spray);color:#0a1420;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,20,32,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--panel-line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:1080px; margin:0 auto;}
+  .nav-id{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--teal); display:flex; align-items:center; gap:8px;}
+  .nav-id .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal); animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  nav ul{list-style:none; display:flex; gap:26px; margin:0; padding:0;}
+  nav a{text-decoration:none; color:var(--muted); font-size:13px; font-family:'JetBrains Mono',monospace; letter-spacing:0.03em; transition:color 0.15s;}
+  nav a:hover{color:var(--teal);}
+  .nav-toggle{display:none;}
+  @media (max-width:720px){
+    nav ul{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:96px 0 88px; position:relative; overflow:hidden;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted);
+    letter-spacing:0.12em; text-transform:uppercase; display:flex; align-items:center; gap:10px; margin-bottom:26px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--muted-dim);}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .tag-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(46px, 7vw, 78px);
+    line-height:0.98;
+    margin:0 0 6px;
+    position:relative;
+    display:inline-block;
+    color:var(--text);
+    transform:skewX(-3deg);
+  }
+  .tag-name .spray{
+    color:var(--spray);
+    text-shadow:
+      2px 0 0 rgba(255,122,69,0.35),
+      -2px 1px 0 rgba(255,122,69,0.18),
+      0 3px 14px rgba(255,122,69,0.25);
+  }
+  .role-line{
+    font-family:'JetBrains Mono',monospace;
+    font-size:clamp(15px,2.1vw,19px);
+    color:var(--teal);
+    margin:14px 0 26px;
+    min-height:26px;
+  }
+  .role-line .caret{display:inline-block; width:9px; height:1.1em; background:var(--teal); margin-left:3px; vertical-align:-3px; animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .pitch{font-size:16.5px; line-height:1.7; color:var(--muted); max-width:52ch; margin-bottom:34px;}
+  .pitch strong{color:var(--text); font-weight:600;}
+
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:13px; padding:12px 20px;
+    border-radius:var(--radius); text-decoration:none; letter-spacing:0.02em;
+    display:inline-flex; align-items:center; gap:8px; transition:all 0.15s ease; border:1px solid transparent;
+  }
+  .btn-primary{background:var(--teal); color:#062421; font-weight:600;}
+  .btn-primary:hover{background:#63e6d5; transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--panel-line); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
+
+  /* schematic diagram */
+  .schema{position:relative; aspect-ratio:1/1; max-width:400px; margin:0 auto;}
+  .schema svg{width:100%; height:100%;}
+  .schema-line{stroke:var(--panel-line); stroke-width:1.4;}
+  .schema-line-active{stroke:var(--teal); stroke-width:1.4; stroke-dasharray:4 5; animation:dash 3.6s linear infinite;}
+  @keyframes dash{to{stroke-dashoffset:-90;}}
+  .node-box{fill:var(--panel); stroke:var(--panel-line); stroke-width:1.2;}
+  .node-box.active{stroke:var(--teal);}
+  .node-label{font-family:'JetBrains Mono',monospace; font-size:9.5px; fill:var(--muted); letter-spacing:0.04em;}
+  .node-label.active{fill:var(--teal);}
+  .ping{fill:var(--teal);}
+  .ping-anim{animation:ping 2.6s ease-in-out infinite;}
+  @keyframes ping{0%,100%{opacity:1;} 50%{opacity:0.25;}}
+
+  /* ---------- SECTION shell ---------- */
+  section{padding:76px 0; border-top:1px solid var(--panel-line);}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:44px; flex-wrap:wrap;}
+  .sec-tag{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--spray); letter-spacing:0.1em;}
+  .sec-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(24px,3.4vw,32px); margin:0;}
+  .sec-rule{flex:1; height:1px; background:var(--panel-line); min-width:40px;}
+
+  /* about */
+  .about-body{font-size:16.5px; line-height:1.85; color:var(--muted); max-width:70ch;}
+  .about-body strong{color:var(--text);}
+  .belief-strip{
+    margin-top:30px; display:flex; gap:0; flex-wrap:wrap;
+    border:1px solid var(--panel-line); border-radius:var(--radius); overflow:hidden;
+  }
+  .belief{flex:1; min-width:180px; padding:18px 20px; border-right:1px solid var(--panel-line);}
+  .belief:last-child{border-right:none;}
+  .belief .n{font-family:'JetBrains Mono',monospace; color:var(--teal); font-size:11px; letter-spacing:0.08em; margin-bottom:8px; display:block;}
+  .belief p{margin:0; font-size:14px; color:var(--text); line-height:1.5;}
+
+  /* experience */
+  .tl{position:relative; padding-left:28px; border-left:1px solid var(--panel-line);}
+  .tl-item{position:relative; padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:""; position:absolute; left:-33px; top:5px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:2px solid var(--teal);}
+  .tl-date{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--spray); margin-bottom:6px; letter-spacing:0.03em;}
+  .tl-role{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; margin:0 0 2px;}
+  .tl-org{font-size:14px; color:var(--muted); margin-bottom:12px;}
+  .tl-list{margin:0; padding-left:18px; color:var(--muted); font-size:14.5px; line-height:1.75;}
+  .tl-list li::marker{color:var(--muted-dim);}
+  .tl-list li{margin-bottom:6px;}
+
+  /* projects */
+  .proj-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:760px){ .proj-grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:var(--radius);
+    padding:26px; display:flex; flex-direction:column; transition:border-color 0.15s, transform 0.15s;
+  }
+  .card:hover{border-color:var(--teal); transform:translateY(-2px);}
+  .card-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; gap:10px;}
+  .card h3{font-family:'Space Grotesk',sans-serif; font-size:18px; margin:0;}
+  .card .kind{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal); display:block; margin-bottom:4px; letter-spacing:0.06em;}
+  .card p{color:var(--muted); font-size:14.2px; line-height:1.7; margin:0 0 16px;}
+  .stack{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
+  .chip{font-family:'JetBrains Mono',monospace; font-size:10.5px; padding:4px 9px; border:1px solid var(--panel-line); border-radius:20px; color:var(--muted);}
+  .card-link{margin-top:auto; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--teal); text-decoration:none; display:inline-flex; align-items:center; gap:6px;}
+  .card-link:hover{text-decoration:underline;}
+  .card.oss{grid-column:1/-1; flex-direction:row; align-items:center; gap:24px; flex-wrap:wrap;}
+  .card.oss .card-body{flex:1; min-width:240px;}
+
+  /* skills */
+  .skill-panel{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:var(--radius); padding:0; overflow:hidden;
+  }
+  .skill-row{display:grid; grid-template-columns:180px 1fr; border-top:1px solid var(--panel-line);}
+  .skill-row:first-child{border-top:none;}
+  @media (max-width:600px){ .skill-row{grid-template-columns:1fr;} }
+  .skill-key{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); letter-spacing:0.05em;
+    padding:18px 20px; border-right:1px solid var(--panel-line); display:flex; align-items:center;
+  }
+  @media (max-width:600px){ .skill-key{border-right:none; border-bottom:1px solid var(--panel-line);} }
+  .skill-vals{padding:16px 20px; display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+  .skill-vals span{font-size:13.5px; color:var(--text);}
+  .skill-vals .sep{color:var(--muted-dim);}
+
+  /* education */
+  .edu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:760px){ .edu-grid{grid-template-columns:1fr;} }
+  .edu-card{border:1px solid var(--panel-line); border-radius:var(--radius); padding:22px;}
+  .edu-card .yr{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--spray);}
+  .edu-card h4{font-family:'Space Grotesk',sans-serif; margin:8px 0 4px; font-size:16px;}
+  .edu-card p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.5;}
+
+  /* footer / contact */
+  footer{padding:80px 0 50px;}
+  .contact-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,5vw,46px); margin:0 0 20px; max-width:14ch;}
+  .contact-title .spray{color:var(--spray);}
+  .contact-row{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:56px;}
+  .foot-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; padding-top:26px; border-top:1px solid var(--panel-line); font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted-dim);}
+  .foot-bottom a{color:var(--muted); text-decoration:none;}
+  .foot-bottom a:hover{color:var(--teal);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="nav-id"><span class="dot"></span> tim@thoithi:~$</div>
+    <nav aria-label="Section navigation">
+      <ul>
+        <li><a href="#about">about</a></li>
+        <li><a href="#experience">experience</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#skills">skills</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero" style="border-top:none;" id="top">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Nairobi, Kenya · systems online</div>
+          <h1 class="tag-name">Tim <span class="spray">Thoithi</span></h1>
+          <div class="role-line mono" id="role-text">Full-Stack Developer<span class="caret"></span></div>
+          <p class="pitch">
+            I build applications, then engineer the systems that let them run reliably at scale.
+            <strong>React and Python interfaces one day, a production Kubernetes cluster the next</strong> —
+            infrastructure as code, repetitive work automated, systems predictable above all else.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:timthoithi100@gmail.com">Email me →</a>
+            <a class="btn btn-ghost" href="https://github.com/timthoithi100" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/timthoithi100/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="schema" aria-hidden="true">
+          <svg viewBox="0 0 300 300">
+            <!-- connecting lines -->
+            <line class="schema-line-active" x1="150" y1="150" x2="150" y2="60"/>
+            <line class="schema-line-active" x1="150" y1="150" x2="70" y2="200"/>
+            <line class="schema-line-active" x1="150" y1="150" x2="230" y2="200"/>
+            <line class="schema-line" x1="150" y1="60" x2="70" y2="200"/>
+            <line class="schema-line" x1="150" y1="60" x2="230" y2="200"/>
+
+            <!-- center node -->
+            <rect class="node-box active" x="112" y="128" width="76" height="44" rx="2"/>
+            <text class="node-label active" x="150" y="146" text-anchor="middle">tim.thoithi</text>
+            <text class="node-label active" x="150" y="160" text-anchor="middle">platform</text>
+
+            <!-- frontend -->
+            <rect class="node-box" x="108" y="34" width="84" height="34" rx="2"/>
+            <text class="node-label" x="150" y="55" text-anchor="middle">react · ui</text>
+
+            <!-- backend -->
+            <rect class="node-box" x="24" y="182" width="92" height="34" rx="2"/>
+            <text class="node-label" x="70" y="203" text-anchor="middle">api · db</text>
+
+            <!-- infra -->
+            <rect class="node-box" x="186" y="182" width="92" height="34" rx="2"/>
+            <text class="node-label" x="232" y="203" text-anchor="middle">k8s · gcp</text>
+
+            <circle class="ping ping-anim" cx="150" cy="60" r="3"/>
+            <circle class="ping ping-anim" style="animation-delay:0.6s" cx="70" cy="199" r="3"/>
+            <circle class="ping ping-anim" style="animation-delay:1.2s" cx="232" cy="199" r="3"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="sec-head"><span class="sec-tag mono">01 / ABOUT</span><div class="sec-rule"></div></div>
+      <p class="about-body">
+        I work at the intersection of software development and cloud infrastructure. Some engineers stop at shipping
+        a feature; I want to know what happens after — how it's deployed, how it scales, what breaks it at 3am.
+        That's taken me from wiring patch panels and configuring routers on-site, to writing Terraform that
+        provisions the cloud those same applications run on, to building the applications themselves in
+        <strong>React, Node.js and Python</strong>. Away from the terminal, I sketch graffiti, practise calligraphy,
+        and play basketball as a two-way guard — three more disciplines that reward the same thing coding does:
+        repetition until the line is clean.
+      </p>
+      <div class="belief-strip">
+        <div class="belief"><span class="n">BELIEF_01</span><p>Infrastructure should be defined as code.</p></div>
+        <div class="belief"><span class="n">BELIEF_02</span><p>Repetitive work should be automated.</p></div>
+        <div class="belief"><span class="n">BELIEF_03</span><p>Systems should be predictable, above all else.</p></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="sec-head"><span class="sec-tag mono">02 / EXPERIENCE</span><div class="sec-rule"></div></div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-date mono">SEP 2025 — PRESENT</div>
+          <h3 class="tl-role">Security Infrastructure Technician (Intern)</h3>
+          <div class="tl-org">Biometrics Technologies Limited · Times Towers, Nairobi</div>
+          <ul class="tl-list">
+            <li>Operate as technician and administrator in a live, multi-tenant enterprise facility — hands-on with monitoring, troubleshooting, and software-hardware integration for critical security systems.</li>
+            <li>Administer Linux-based systems and network infrastructure in production, applying the same CLI and configuration discipline used in containerised platform environments.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">JUL — AUG 2024</div>
+          <h3 class="tl-role">Security Infrastructure Technician (Intern)</h3>
+          <div class="tl-org">Biometrics Technologies Limited · Equity Bank sub-branch deployment</div>
+          <ul class="tl-list">
+            <li>On-site deployment: CCTV systems, patch panel wiring, access control, and fingerprint authentication — direct exposure to where software meets physical infrastructure.</li>
+            <li>Built operational understanding of uptime, incident response, and physical security architecture in a regulated banking environment.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">MAY — AUG 2023</div>
+          <h3 class="tl-role">Software Engineer (Attaché)</h3>
+          <div class="tl-org">Biometrics Technologies Limited</div>
+          <ul class="tl-list">
+            <li>Built an ASP.NET web application and API with full CRUD functionality, connected to Microsoft SQL Server, while learning C# and SQL best practices.</li>
+            <li>Worked within a structured team environment using version control and enterprise deployment workflows.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="sec-head"><span class="sec-tag mono">03 / PROJECTS</span><div class="sec-rule"></div></div>
+      <div class="proj-grid">
+
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <span class="kind">MULTI-ENV DEPLOYMENT ARCHITECTURE</span>
+              <h3>Yolo</h3>
+            </div>
+          </div>
+          <p>Architected a full DevOps delivery pipeline around an existing e-commerce app, focused on the platform layer rather than application code — three deployment targets from one codebase: local via Docker Compose, staging via Vagrant + Ansible, production on a Kubernetes cluster on GCP. All infrastructure defined as code.</p>
+          <div class="stack">
+            <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">GCP</span><span class="chip">Ansible</span><span class="chip">Terraform</span>
+          </div>
+          <a class="card-link" href="https://github.com/timthoithi100/yolo" target="_blank" rel="noopener">View repository →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <span class="kind">SERVERLESS AI API</span>
+              <h3>insight-agent</h3>
+            </div>
+          </div>
+          <p>Built and deployed an AI-powered customer feedback analysis API serverlessly on GCP, handling cold-start behaviour and production constraints. Infrastructure fully defined in HCL — deployable and tear-down-able from a single Terraform apply. Now extending into a full RAG agent architecture.</p>
+          <div class="stack">
+            <span class="chip">FastAPI</span><span class="chip">Python</span><span class="chip">Cloud Functions</span><span class="chip">Terraform</span>
+          </div>
+          <a class="card-link" href="https://github.com/timthoithi100/insight-agent" target="_blank" rel="noopener">View repository →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <span class="kind">PRODUCTION CLIENT WEBSITE</span>
+              <h3>Pewa Miracle Travel &amp; Tours</h3>
+            </div>
+          </div>
+          <p>Designed, built, and deployed a live website for a licensed Nairobi travel company — currently serving real users. Handled domain configuration, DNS, SSL setup, and hosting end-to-end, without a template or website builder.</p>
+          <div class="stack">
+            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">DNS / SSL</span>
+          </div>
+          <a class="card-link" href="https://pewamiracletravel.com" target="_blank" rel="noopener">View live site →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <span class="kind">FULL-STACK CRUD APP</span>
+              <h3>tasks-app</h3>
+            </div>
+          </div>
+          <p>A full-stack tasks application built with React/TypeScript on the frontend and FastAPI/Python on the backend, covering create, read, update and delete flows end to end.</p>
+          <div class="stack">
+            <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">FastAPI</span>
+          </div>
+          <a class="card-link" href="https://github.com/timthoithi100/tasks-app" target="_blank" rel="noopener">View repository →</a>
+        </div>
+
+        <div class="card oss">
+          <div class="card-body">
+            <span class="kind">OPEN SOURCE · MEMTOMEM</span>
+            <h3 style="margin-bottom:8px;">PR #453 — CLI navigation fix</h3>
+            <p style="margin-bottom:0;">Diagnosed a misleading navigation hint in an unfamiliar CLI wizard — it displayed a "back" option when no back path existed — and traced the fix to the wizard's position state rather than patching the single symptom. Added two regression tests with Click's CliRunner to guard both the fix and existing back-navigation behaviour.</p>
+          </div>
+          <a class="card-link" href="https://github.com/memtomem/memtomem/pull/453" target="_blank" rel="noopener">View pull request →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="sec-head"><span class="sec-tag mono">04 / SKILLS</span><div class="sec-rule"></div></div>
+      <div class="skill-panel">
+        <div class="skill-row">
+          <div class="skill-key">LANGUAGES</div>
+          <div class="skill-vals"><span>JavaScript</span><span class="sep">·</span><span>TypeScript</span><span class="sep">·</span><span>Python</span><span class="sep">·</span><span>C#</span><span class="sep">·</span><span>Bash</span><span class="sep">·</span><span>SQL</span><span class="sep">·</span><span>HCL</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-key">FRONTEND</div>
+          <div class="skill-vals"><span>React</span><span class="sep">·</span><span>HTML / CSS</span><span class="sep">·</span><span>Responsive Design</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-key">BACKEND</div>
+          <div class="skill-vals"><span>Node.js / Express</span><span class="sep">·</span><span>FastAPI</span><span class="sep">·</span><span>Flask</span><span class="sep">·</span><span>Django</span><span class="sep">·</span><span>ASP.NET MVC</span><span class="sep">·</span><span>REST API design</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-key">DEVOPS &amp; CLOUD</div>
+          <div class="skill-vals"><span>Docker</span><span class="sep">·</span><span>Kubernetes (GKE)</span><span class="sep">·</span><span>Terraform</span><span class="sep">·</span><span>Ansible</span><span class="sep">·</span><span>Vagrant</span><span class="sep">·</span><span>GitHub Actions</span><span class="sep">·</span><span>Jenkins</span><span class="sep">·</span><span>GCP</span><span class="sep">·</span><span>Prometheus / Grafana</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-key">DATABASES</div>
+          <div class="skill-vals"><span>PostgreSQL</span><span class="sep">·</span><span>MongoDB</span><span class="sep">·</span><span>MS SQL Server</span><span class="sep">·</span><span>SQLite</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-key">TOOLS &amp; OTHER</div>
+          <div class="skill-vals"><span>Git</span><span class="sep">·</span><span>VS Code</span><span class="sep">·</span><span>Postman</span><span class="sep">·</span><span>Power BI</span><span class="sep">·</span><span>Nginx</span><span class="sep">·</span><span>Fluent Spanish</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="sec-head"><span class="sec-tag mono">05 / EDUCATION</span><div class="sec-rule"></div></div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <span class="yr mono">2021 — 2025</span>
+          <h4>Multimedia University of Kenya</h4>
+          <p>BSc, Business Information Technology</p>
+        </div>
+        <div class="edu-card">
+          <span class="yr mono">2025</span>
+          <h4>Moringa School</h4>
+          <p>Certificate in DevOps Engineering — CI/CD, Containers, IaC, Kubernetes</p>
+        </div>
+        <div class="edu-card">
+          <span class="yr mono">2017 — 2021</span>
+          <h4>Mang'u High School</h4>
+          <p>KCSE — Grade B+</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CONTACT -->
+  <footer id="contact">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-tag mono">06 / CONTACT</span><div class="sec-rule"></div></div>
+      <h2 class="contact-title">Let's build<br>something <span class="spray">reliable</span>.</h2>
+      <div class="contact-row">
+        <a class="btn btn-primary" href="mailto:timthoithi100@gmail.com">timthoithi100@gmail.com</a>
+        <a class="btn btn-ghost" href="https://github.com/timthoithi100" target="_blank" rel="noopener">github.com/timthoithi100</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/timthoithi100/" target="_blank" rel="noopener">linkedin.com/in/timthoithi100</a>
+      </div>
+      <div class="foot-bottom">
+        <span>Nairobi, Kenya · references available on request</span>
+        <span>© 2026 Tim Thoithi — built with a terminal, not a template</span>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script>
+  const roles = ["Full-Stack Developer", "DevOps Engineer", "Platform Engineer"];
+  const el = document.getElementById('role-text');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ri = 0;
+
+  function typeRole(role, cb){
+    let i = 0;
+    const caret = '<span class="caret"></span>';
+    const iv = setInterval(() => {
+      i++;
+      el.innerHTML = role.slice(0, i) + caret;
+      if (i >= role.length){ clearInterval(iv); setTimeout(cb, 1400); }
+    }, 55);
+  }
+  function eraseRole(cb){
+    let text = el.textContent;
+    const caret = '<span class="caret"></span>';
+    const iv = setInterval(() => {
+      text = text.slice(0, -1);
+      el.innerHTML = text + caret;
+      if (text.length === 0){ clearInterval(iv); cb(); }
+    }, 30);
+  }
+  function cycle(){
+    ri = (ri + 1) % roles.length;
+    eraseRole(() => typeRole(roles[ri], cycle));
+  }
+  if (!reduceMotion){
+    setTimeout(cycle, 1600);
+  }
+</script>
+
+</body>
+</html>
