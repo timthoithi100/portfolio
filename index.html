@@ -75,7 +75,7 @@
     letter-spacing:0.12em; text-transform:uppercase; display:flex; align-items:center; gap:10px; margin-bottom:26px;
   }
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--muted-dim);}
-  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
+  .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center;}
   @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
 
   .tag-name{
@@ -121,7 +121,7 @@
   .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
 
   /* schematic diagram */
-  .schema{position:relative; aspect-ratio:1/1; max-width:400px; margin:0 auto;}
+  .schema{position:relative; aspect-ratio:1/1; max-width:560px; width:100%; margin:0 auto;}
   .schema svg{width:100%; height:100%;}
   .schema-line{stroke:var(--panel-line); stroke-width:1.4;}
   .schema-line-active{stroke:var(--teal); stroke-width:1.4; stroke-dasharray:4 5; animation:dash 3.6s linear infinite;}
